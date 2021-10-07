@@ -1,0 +1,52 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Sources csv and json to s3. An AWS Serverless Specification template describing your function. An AWS Serverless Specification template describing your function.
+Resources:
+  sourcingScript:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.9
+      CodeUri: s3://rearc-lambda-scripts/sourcingScript.zip
+      Description: Sources csv and json to s3
+      MemorySize: 128
+      Timeout: 60
+      Role: 'arn:aws:iam::372721562372:role/service-role/sourcingScript-role-zm3n8l3i'
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /sourcingScript
+            Method: ANY
+
+  s3sqstrigger:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.9
+      CodeUri: s3://rearc-lambda-scripts/s3sqstrigger.zip
+      Description: ''
+      MemorySize: 128
+      Timeout: 3
+      Role: 'arn:aws:iam::372721562372:role/service-role/s3-sqs-trigger-role-9xw8jr8o'       
+
+  analyticsLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.7
+      CodeUri: s3://rearc-lambda-scripts/analyticsLambda.zip
+      Description: ''
+      MemorySize: 509
+      Timeout: 30
+      Role: 'arn:aws:iam::372721562372:role/service-role/analyticsLambda-role-xmr8l0k6'
+      Layers:
+        - 'arn:aws:lambda:us-east-1:372721562372:layer:pandas:2'
+
+  analyticsLambdaEventSourceMapping:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties: 
+      BatchSize: 1
+      Enabled: true
+      EventSourceArn: 'arn:aws:sqs:us-east-1:372721562372:JSON-Event-Queue'
+      FunctionName: !GetAtt analyticsLambda.Arn
