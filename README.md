@@ -6,6 +6,8 @@ Step 1: Write a cool function to load data to S3 (but remember to implement code
 Step 2: Trigger an SQS queue as soon as the data is loaded to S3 <br />
 Step 3: 
 
+So, it looks something like this: <br /> <br />
+![Or not](https://github.com/mishraapoorva/AWSDataPipeline/blob/master/img/rearc-dataflow.jpg)
 
 
 ### Services Used (- {& for what???}):
