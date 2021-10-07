@@ -6,6 +6,8 @@ Step 1: Write a cool function to load data to S3 (but remember to implement code
 Step 2: Trigger a message to SQS queue as soon as the data is loaded to S3 <br />
 Step 3: Recieve the message from SQS queue, fetch csv & json data from S3 and show off your data analytics skills using Pandas.
 
+So, it looks something like this: <br /> <br />
+![Or not](https://github.com/mishraapoorva/AWSDataPipeline/blob/master/img/rearc-dataflow.jpg)
 
 ### Services Used (- {& for what???}):
 - Lambda - To write Functions (code) to perform the tasks like reading to and from S3, data analysis
