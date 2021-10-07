@@ -3,9 +3,8 @@
 So, lets create a data pipeline using the Amazing Amazon Web Services!!! <br />
 All we have to do, is to create an AWS account and work with a few different services! <br />
 Step 1: Write a cool function to load data to S3 (but remember to implement code reusability) <br />
-Step 2: Trigger an SQS queue as soon as the data is loaded to S3 <br />
-Step 3: 
-
+Step 2: Trigger a message to SQS queue as soon as the data is loaded to S3 <br />
+Step 3: Recieve the message from SQS queue, fetch csv & json data from S3 and show off your data analytics skills using Pandas.
 
 
 ### Services Used (- {& for what???}):
@@ -14,7 +13,7 @@ Step 3:
 - SQS - Gets populated each time data is loaded into S3
 - CloudFormation - For creating and orchestrating the data pipeline  
 
-##Also note,
+## Also note,
 This project consists of three folders solving three challenges of a data quest
 ### Part 1 & 2: AWS S3 & Sourcing Datasets (sources: CSV and API)
 > - This folder contains the source code for Part 1 & Part 2 combined
@@ -29,8 +28,8 @@ This project consists of three folders solving three challenges of a data quest
 > - Used Lambda Layer for importing pandas, boto3 packages
 
 ### Part 4: Infrastructure as Code & Data Pipeline with AWS CloudFormation
-> - Create a neat, little stack using yaml template to define the resources Using CloudFormation <br />
-> - This folder consists of the sourcingScript.yaml file
+> - Create a neat, little stack using yaml template to define the resources using CloudFormation <br />
+> - This folder consists of the cloudFormation.yaml file
 > 
 
 

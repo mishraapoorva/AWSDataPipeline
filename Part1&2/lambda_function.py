@@ -7,7 +7,6 @@ s3_resource = boto3.resource('s3')
 http_pool = urllib3.PoolManager()
 
 # Config for JSON file
-json_bucket = 'rearc-population-data'
 json_file_name = 'data.json'
 json_url = 'https://datausa.io/api/data?drilldowns=Nation&measures=Population'
 
@@ -18,7 +17,7 @@ csv_file_name = 'pr.data.0.Current'
 csv_base_url = 'https://download.bls.gov'
 csv_uri = '/pub/time.series/pr/'
 pattern = re.compile(r'HREF=\"(.*?)\"[^>]*')
-    
+
 
 def save_url_to_s3(url, bucket, key):
     response = http_pool.request('GET', url)
@@ -30,7 +29,7 @@ def source_csv():
     # print(csv_root_url)
     response = http_pool.urlopen('GET', csv_base_url + csv_uri)
     csv_html_page = (response.data.decode('utf-8'))
-    
+
     csv_files = []
     s3_files = list(s3_resource.Bucket(csv_bucket).objects.all())
 
@@ -56,14 +55,14 @@ def source_csv():
         save_url_to_s3(csv_base_url + csv_uri + common_file, csv_bucket, common_file)
 
 
-def source_json():
+def source_json(json_bucket):
     # print("saving json to s3")
     save_url_to_s3(json_url, json_bucket, json_file_name)
 
 
 def lambda_handler(event, context):
     source_csv()
-    source_json()
+    source_json(event['bucket'])
     return {
         'statusCode': 200
     }
