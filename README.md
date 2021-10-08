@@ -21,7 +21,7 @@ This project consists of three folders solving three challenges of a data quest
 > - This folder contains the source code for Part 1 & Part 2 combined
 > - The .py file (lambda function) loads data from two sources (viz, CSV and API) into S3 buckets
 > - Link to data in S3 and source code:
->> - https://rearc-population-data.s3.amazonaws.com/data.json
+>> - https://rearc-population-data-1633606565.s3.amazonaws.com/data.json
 >> - https://rearc-pr-time-series-data.s3.amazonaws.com/pr.data.0.Current
 
 ### Part 3: Data Analytics
